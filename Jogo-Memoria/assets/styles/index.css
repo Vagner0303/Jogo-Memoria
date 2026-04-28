@@ -20,6 +20,7 @@ linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0)) border-box;
 }
 
 .imagens{
+pointer-events: none;
 position: relative;
 top: -600px;
 height: 600px;
