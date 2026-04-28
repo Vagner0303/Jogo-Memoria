@@ -1,0 +1,71 @@
+
+.Cartas {
+height: 600px;
+display: flex;
+flex-direction: row; 
+justify-content: space-around; 
+align-items: center; 
+flex-wrap: wrap;
+gap: 60px;   
+}
+
+.Cartas > div {
+height: 50%;
+width: 16%;
+border-radius: 10px;
+border: 3px solid transparent;
+background: 
+linear-gradient(rgb(19, 3, 110), rgba(6, 10, 241, 0.151)) padding-box, 
+linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0)) border-box;
+}
+
+.imagens{
+position: relative;
+top: -600px;
+height: 600px;
+display: flex;
+flex-direction: row; 
+justify-content: space-around; 
+align-items: center; 
+flex-wrap: wrap;
+gap: 60px;   
+}
+
+.imagens > img {
+height: 50%;
+width: 16%;
+border-radius: 10px;
+border: 3px solid transparent;
+}
+
+button {
+position: relative;
+top: -520px;
+margin-left: 1300px;
+background-color: red;
+color: aliceblue;
+cursor: pointer;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-weight: bold;
+border: solid 3px red;
+padding: 5px 8px;
+z-index: 10;
+border-radius: 4px;
+}
+
+button:hover {
+  border: solid black;
+  background-color: black;
+}
+
+.Pontuacao {
+position: relative;
+top: -520px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.Numero-tentativas {
+position: relative;
+top: -470px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
