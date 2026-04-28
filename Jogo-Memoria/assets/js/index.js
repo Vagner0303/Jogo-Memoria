@@ -30,7 +30,7 @@ cartas.forEach((carta, index) => {
     carta.addEventListener("click", () => {
         if (bloqueado) return;
         if (index === primeiroIndex) return;
-
+        if (imagens[index].style.visibility === "visible") return;
         imagens[index].style.visibility = "visible";
 
         if (!primeiraCarta) {
@@ -50,8 +50,8 @@ cartas.forEach((carta, index) => {
 });
 
 function verificarPar() {
-    const img1 = imagens[primeiroIndex].src;
-    const img2 = imagens[segundoIndex].src;
+    const img1 = imagens[primeiroIndex].getAttribute("src");
+    const img2 = imagens[segundoIndex].getAttribute("src");
 
     if (img1 === img2) {
         pontuacao++;
@@ -78,9 +78,9 @@ function resetarEscolha() {
 }
 
 botaoReset.addEventListener("click", () => {
-    imagens.forEach(img => {
+    imagens.forEach(img) => {
         img.style.visibility = "hidden";
-    });
+    };
 
     pontuacao = 0;
     tentativas = 0;
