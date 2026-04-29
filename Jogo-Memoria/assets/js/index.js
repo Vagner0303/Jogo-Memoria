@@ -16,77 +16,87 @@ let bloqueado = false;
 let pontuacao = 0;
 let tentativas = 0;
 
-// Esconde tudo
-imagens.forEach(img => {
-    img.style.visibility = "hidden";
+// Esconde todas as imagens no começo
+imagens.forEach((img) => {
+  img.style.visibility = "hidden";
 });
 
 function atualizarPlacar() {
-    pontuacaoTexto.textContent = "PONTUAÇÃO: " + pontuacao;
-    tentativasTexto.textContent = "NUMERO DE TENTATIVAS: " + tentativas;
+  pontuacaoTexto.textContent = "PONTUAÇÃO: " + pontuacao;
+  tentativasTexto.textContent = "NUMERO DE TENTATIVAS: " + tentativas;
 }
 
 cartas.forEach((carta, index) => {
-    carta.addEventListener("click", () => {
-        if (bloqueado) return;
-        if (index === primeiroIndex) return;
-        if (imagens[index].style.visibility === "visible") return;
-        imagens[index].style.visibility = "visible";
+  carta.addEventListener("click", () => {
+    if (bloqueado) return;
+    if (index === primeiroIndex) return;
+    if (imagens[index].style.visibility === "visible") return;
 
-        if (!primeiraCarta) {
-            primeiraCarta = carta;
-            primeiroIndex = index;
-            return;
-        }
+    imagens[index].style.visibility = "visible";
 
-        segundaCarta = carta;
-        segundoIndex = index;
+    if (!primeiraCarta) {
+      primeiraCarta = carta;
+      primeiroIndex = index;
+      return;
+    }
 
-        tentativas++;
-        atualizarPlacar();
+    segundaCarta = carta;
+    segundoIndex = index;
 
-        verificarPar();
-    });
+    tentativas++;
+    atualizarPlacar();
+
+    verificarPar();
+  });
 });
 
 function verificarPar() {
-    const img1 = imagens[primeiroIndex].getAttribute("src");
-    const img2 = imagens[segundoIndex].getAttribute("src");
+  const img1 = imagens[primeiroIndex].getAttribute("src");
+  const img2 = imagens[segundoIndex].getAttribute("src");
 
-    if (img1 === img2) {
-        pontuacao++;
-        atualizarPlacar();
-        resetarEscolha();
-    } else {
-        bloqueado = true;
+  if (img1 === img2) {
+    pontuacao++;
+    atualizarPlacar();
+    resetarEscolha();
+  } else {
+     pontuacao--;
+     bloqueado = true ;
+    
+    setTimeout(() => {
+      imagens[primeiroIndex].style.visibility = "hidden";
+      imagens[segundoIndex].style.visibility = "hidden";
 
-        setTimeout(() => {
-            imagens[primeiroIndex].style.visibility = "hidden";
-            imagens[segundoIndex].style.visibility = "hidden";
+      resetarEscolha();
+    }, 1000);
+  }
 
-            resetarEscolha();
-        }, 1000);
-    }
+    atualizarPlacar();
+
+  if (img1 === img2) {
+    resetarEscolha();
+  }
 }
 
 function resetarEscolha() {
-    primeiraCarta = null;
-    segundaCarta = null;
-    primeiroIndex = null;
-    segundoIndex = null;
-    bloqueado = false;
+  primeiraCarta = null;
+  segundaCarta = null;
+  primeiroIndex = null;
+  segundoIndex = null;
+  bloqueado = false;
 }
 
 botaoReset.addEventListener("click", () => {
-    imagens.forEach(img) => {
-        img.style.visibility = "hidden";
-    };
+  imagens.forEach((img) => {
+    img.style.visibility = "hidden";
+  });
 
-    pontuacao = 0;
-    tentativas = 0;
+  pontuacao = 0;
+  tentativas = 0;
 
-    atualizarPlacar();
-    resetarEscolha();
+  atualizarPlacar();
+  resetarEscolha();
 });
 
 atualizarPlacar();
+
+
