@@ -59,7 +59,7 @@ function verificarPar() {
     atualizarPlacar();
     resetarEscolha();
   } else {
-     pontuacao--;
+     pontuacao = Math.max(0, pontuacao - 1);
      bloqueado = true ;
     
     setTimeout(() => {
