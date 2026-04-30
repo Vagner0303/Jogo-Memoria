@@ -1,4 +1,4 @@
-const cartas = document.querySelectorAll(".Cartas div");
+const cartas = document.querySelectorAll(".Cartas div"); 
 const imagens = document.querySelectorAll(".imagens img");
 
 const pontuacaoTexto = document.querySelector(".Pontuacao");
@@ -16,7 +16,6 @@ let bloqueado = false;
 let pontuacao = 0;
 let tentativas = 0;
 
-// Esconde todas as imagens no começo
 imagens.forEach((img) => {
   img.style.visibility = "hidden";
 });
@@ -24,6 +23,20 @@ imagens.forEach((img) => {
 function atualizarPlacar() {
   pontuacaoTexto.textContent = "PONTUAÇÃO: " + pontuacao;
   tentativasTexto.textContent = "NUMERO DE TENTATIVAS: " + tentativas;
+}
+
+//  FUNÇÃO para embaralhar as cartas
+function embaralharCartas() {
+  const srcs = Array.from(imagens).map(img => img.getAttribute("src"));
+
+  for (let i = srcs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [srcs[i], srcs[j]] = [srcs[j], srcs[i]];
+  }
+  imagens.forEach((img, index) => {
+    img.setAttribute("src", srcs[index]);
+    img.style.visibility = "hidden";
+  });
 }
 
 cartas.forEach((carta, index) => {
@@ -93,10 +106,11 @@ botaoReset.addEventListener("click", () => {
   pontuacao = 0;
   tentativas = 0;
 
+
+  embaralharCartas();
   atualizarPlacar();
   resetarEscolha();
 });
 
+embaralharCartas();
 atualizarPlacar();
-
-
