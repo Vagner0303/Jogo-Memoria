@@ -31,107 +31,122 @@ imagens.forEach((img) => {
   img.style.visibility = "hidden";
 });
 
-// Atualiza o placar na tela
+// ---------------- FUNÇÃO: atualizarPlacar ----------------
+// Atualiza os textos de pontuação e tentativas na tela
 function atualizarPlacar() {
   pontuacaoTexto.textContent = "PONTUAÇÃO: " + pontuacao;
   tentativasTexto.textContent = "NUMERO DE TENTATIVAS: " + tentativas;
 }
 
-// Função para embaralhar as cartas
+// ---------------- FUNÇÃO: embaralharCartas ----------------
+// Responsável por embaralhar as imagens das cartas
 function embaralharCartas() {
-  // Pega todas as imagens (src)
+  // Cria um array com os caminhos (src) das imagens
   const srcs = Array.from(imagens).map(img => img.getAttribute("src"));
 
-  // Algoritmo Fisher-Yates (embaralhamento)
+  // Algoritmo Fisher-Yates (embaralhamento aleatório eficiente)
   for (let i = srcs.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
+
+    // Troca os elementos de posição
     [srcs[i], srcs[j]] = [srcs[j], srcs[i]];
   }
 
-  // Aplica o novo embaralhamento nas imagens
+  // Aplica o embaralhamento nas imagens do jogo
   imagens.forEach((img, index) => {
     img.setAttribute("src", srcs[index]);
-    img.style.visibility = "hidden"; // esconde novamente
+
+    // Esconde todas as cartas novamente após embaralhar
+    img.style.visibility = "hidden";
   });
 }
 
-// Adiciona evento de clique em cada carta
+// ---------------- EVENTO DE CLIQUE NAS CARTAS ----------------
 cartas.forEach((carta, index) => {
   carta.addEventListener("click", () => {
 
     // Impede jogadas inválidas
-    if (bloqueado) return; // se estiver bloqueado
-    if (index === primeiroIndex) return; // mesma carta
-    if (imagens[index].style.visibility === "visible") return; // já aberta
+    if (bloqueado) return; // bloqueia durante animação
+    if (index === primeiroIndex) return; // evita clicar na mesma carta
+    if (imagens[index].style.visibility === "visible") return; // evita carta já aberta
 
-    // Mostra a carta
+    // Mostra a carta clicada
     imagens[index].style.visibility = "visible";
 
-    // Se for a primeira carta clicada
+    // Se ainda não existe primeira carta selecionada
     if (!primeiraCarta) {
-      primeiraCarta = carta;
-      primeiroIndex = index;
-      return;
+      primeiraCarta = carta;     // guarda a carta
+      primeiroIndex = index;     // guarda o índice
+      return; // espera a segunda carta
     }
 
-    // Se for a segunda carta
+    // Se já existe primeira carta, essa é a segunda
     segundaCarta = carta;
     segundoIndex = index;
 
-    // Conta tentativa
+    // Incrementa o número de tentativas
     tentativas++;
     atualizarPlacar();
 
-    // Verifica se formou par
+    // Verifica se as cartas formam um par
     verificarPar();
   });
 });
 
-// Função para verificar se as duas cartas são iguais
+// ---------------- FUNÇÃO: verificarPar ----------------
+// Verifica se as duas cartas escolhidas são iguais
 function verificarPar() {
+  // Pega o caminho das imagens selecionadas
   const img1 = imagens[primeiroIndex].getAttribute("src");
   const img2 = imagens[segundoIndex].getAttribute("src");
 
-  // Se forem iguais
+  // Caso sejam iguais (acertou o par)
   if (img1 === img2) {
     pontuacao++; // ganha ponto
     atualizarPlacar();
-    resetarEscolha(); // limpa seleção
+
+    // Limpa seleção para próxima jogada
+    resetarEscolha();
+
   } else {
-    // Se forem diferentes
+    // Caso sejam diferentes (errou)
     pontuacao = Math.max(0, pontuacao - 1); // perde ponto sem ficar negativo
+
     bloqueado = true; // bloqueia o jogo temporariamente
 
-    // Espera 1 segundo e vira as cartas de volta
+    // Espera 1 segundo antes de esconder as cartas novamente
     setTimeout(() => {
       imagens[primeiroIndex].style.visibility = "hidden";
       imagens[segundoIndex].style.visibility = "hidden";
 
-      resetarEscolha(); // limpa seleção
+      // Libera o jogo para próxima jogada
+      resetarEscolha();
     }, 1000);
   }
 
+  // Atualiza o placar depois da verificação
   atualizarPlacar();
 }
 
-// Reseta as escolhas do jogador
+// ---------------- FUNÇÃO: resetarEscolha ----------------
+// Limpa todas as variáveis de seleção
 function resetarEscolha() {
   primeiraCarta = null;
   segundaCarta = null;
   primeiroIndex = null;
   segundoIndex = null;
-  bloqueado = false;
+  bloqueado = false; // desbloqueia o jogo
 }
 
-// Evento do botão de reset
+// ---------------- EVENTO DO BOTÃO RESET ----------------
 botaoReset.addEventListener("click", () => {
 
-  // Esconde todas as cartas
+  // Esconde todas as cartas novamente
   imagens.forEach((img) => {
     img.style.visibility = "hidden";
   });
 
-  // Zera pontuação e tentativas
+  // Reseta pontuação e tentativas
   pontuacao = 0;
   tentativas = 0;
 
@@ -141,6 +156,10 @@ botaoReset.addEventListener("click", () => {
   resetarEscolha();
 });
 
-// Inicialização do jogo
-embaralharCartas(); // embaralha ao iniciar
-atualizarPlacar();  // mostra placar inicial
+// ---------------- INICIALIZAÇÃO DO JOGO ----------------
+
+// Embaralha as cartas ao iniciar
+embaralharCartas();
+
+// Atualiza o placar inicial (0 pontos, 0 tentativas)
+atualizarPlacar();
