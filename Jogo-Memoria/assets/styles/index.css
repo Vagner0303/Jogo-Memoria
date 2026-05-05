@@ -1,101 +1,101 @@
 body {
-  overflow-x: hidden;
-  overflow: hidden;
+  overflow-x: hidden;  /* Esconde a barra de rolagem horizontal */
+  overflow: hidden;    /* Esconde qualquer conteúdo que ultrapasse a tela (horizontal e vertical) */
 }
 
 .Cartas {
-margin-top: 100px;
-height: 600px;
-display: flex;
-flex-direction: row; 
-justify-content: space-around; 
-align-items: center; 
-flex-wrap: wrap;
-gap: 10px;   
+  margin-top: 100px;             /* Empurra o container 100px para baixo */
+  height: 600px;                 /* Altura fixa do container das cartas */
+  display: flex;                  /* Ativa o Flexbox para organizar os filhos */
+  flex-direction: row;            /* Alinha os filhos em linha (horizontalmente) */
+  justify-content: space-around; /* Distribui espaço igual ao redor de cada filho */
+  align-items: center;           /* Centraliza os filhos verticalmente */
+  flex-wrap: wrap;               /* Permite que os filhos quebrem para a próxima linha */
+  gap: 10px;                    /* Espaçamento de 10px entre cada carta */
 }
 
 .Cartas > div {
-height: 40%;
-width: 16%;
-border-radius: 10px;
-border: 3px solid transparent;
-background: 
-linear-gradient(rgb(19, 3, 110), rgba(6, 10, 241, 0.151)) padding-box, 
-linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0)) border-box;
+  height: 40%;                   /* Cada carta ocupa 40% da altura do container pai */
+  width: 16%;                    /* Cada carta ocupa 16% da largura do container pai */
+  border-radius: 10px;           /* Arredonda os cantos das cartas */
+  border: 3px solid transparent; /* Borda invisível de 3px (necessária para o truque de gradiente) */
+  background:                     /* Define dois fundos sobrepostos: */
+    linear-gradient(rgb(19,3,110), rgba(6,10,241,0.151)) padding-box, /* 1º: Gradiente azul escuro → transparente (área interna) */
+    linear-gradient(45deg, rgb(0,0,0), rgb(0,0,0)) border-box;       /* 2º: Borda preta (área da borda) */
 }
 
-.imagens{
-pointer-events: none;
-position: relative;
-top: -600px;
-height: 600px;
-display: flex;
-flex-direction: row; 
-justify-content: space-around; 
-align-items: center; 
-flex-wrap: wrap;
-gap: 10px;   
+.imagens {
+  pointer-events: none;          /* Desativa interações do mouse (clique, hover) */
+  position: relative;           /* Permite usar top/left para deslocar o elemento */
+  top: -600px;                  /* Sobe o container 600px — sobrepõe o .Cartas */
+  height: 600px;                /* Mesma altura que .Cartas para alinhar perfeitamente */
+  display: flex;                 /* Ativa o Flexbox */
+  flex-direction: row;           /* Filhos em linha (igual ao .Cartas) */
+  justify-content: space-around;/* Mesma distribuição que .Cartas */
+  align-items: center;          /* Centraliza verticalmente (igual ao .Cartas) */
+  flex-wrap: wrap;              /* Permite quebra de linha (igual ao .Cartas) */
+  gap: 10px;                   /* Mesmo espaçamento que .Cartas */
 }
 
 .imagens > img {
-height: 40%;
-width: 16%;
-border-radius: 10px;
-border: 3px solid transparent;
+  height: 40%;                  /* Mesma altura que as divs de .Cartas */
+  width: 16%;                   /* Mesma largura que as divs de .Cartas */
+  border-radius: 10px;          /* Arredonda os cantos das imagens (igual às cartas) */
+  border: 3px solid transparent;/* Borda transparente para manter o tamanho igual às cartas */
 }
 
 button {
-font-size:larger;
-position: relative;
-top: -560px;
-margin-left: 810px;
-background-color: red;
-color: aliceblue;
-cursor: pointer;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-font-weight: bold;
-border: solid 3px red;
-padding: 10px 15px;
-z-index: 10;
-border-radius: 4px;
+  font-size: larger;            /* Texto maior que o padrão do navegador */
+  position: relative;          /* Permite deslocamento com top */
+  top: -560px;                 /* Sobe o botão para ficar na área das cartas */
+  margin-left: 810px;          /* Empurra o botão para a direita */
+  background-color: red;        /* Fundo vermelho */
+  color: aliceblue;             /* Texto branco azulado */
+  cursor: pointer;              /* Muda o cursor para mãozinha ao passar em cima */
+  font-family: 'Lucida Sans', ...;/* Define a fonte do texto */
+  font-weight: bold;             /* Texto em negrito */
+  border: solid 3px red;        /* Borda vermelha de 3px */
+  padding: 10px 15px;           /* Espaçamento interno: 10px cima/baixo, 15px lados */
+  z-index: 10;                  /* Garante que o botão fique na frente de outros elementos */
+  border-radius: 4px;           /* Arredonda levemente os cantos do botão */
 }
 
 button:hover {
-  border: solid black;
-  background-color: black;
+  border: solid black;          /* Borda preta ao passar o mouse */
+  background-color: black;      /* Fundo preto ao passar o mouse */
 }
 
 .Pontuacao {
-width: 12%;
-color: green;
-font-size:x-large;
-position: relative;
-top: -580px;
-margin-left: 400px;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-border: 3px solid green;
+  width: 12%;                   /* Largura do painel de pontuação */
+  color: green;                  /* Texto verde */
+  font-size: x-large;           /* Texto extra grande */
+  position: relative;           /* Permite deslocamento com top */
+  top: -580px;                  /* Sobe para o nível das cartas */
+  margin-left: 400px;           /* Posiciona horizontalmente */
+  font-family: 'Lucida Sans', ...;/* Fonte do texto */
+  border: 3px solid green;      /* Borda verde de 3px */
 }
 
 .Numero-tentativas {
-height: 40%;
-color:  rgb(24, 44, 136);
-font-size:x-large;
-position: relative;
-top: -640px;
-margin-left: 1100px;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-border: 3px solid rgb(24, 44, 136);
+  height: 40%;                  /* Altura do painel de tentativas */
+  color: rgb(24,44,136);        /* Texto azul escuro */
+  font-size: x-large;           /* Texto extra grande */
+  position: relative;           /* Permite deslocamento com top */
+  top: -640px;                  /* Sobe mais do que os outros elementos */
+  margin-left: 1100px;          /* Empurra bem para a direita */
+  font-family: 'Lucida Sans', ...;/* Fonte do texto */
+  border: 3px solid rgb(24,44,136);/* Borda azul escuro de 3px */
 }
 
 h1 {
-text-align: center;
-width: 20%;
-border-radius: 10px;
+  text-align: center;           /* Centraliza o texto do título */
+  width: 20%;                   /* O h1 ocupa apenas 20% da largura */
+  border-radius: 10px;          /* Arredonda os cantos do h1 */
 }
 
-.imagem-inicial > img{
-position:absolute;
-top: 0;
-width: 68%;
-margin-left: 300px
+.imagem-inicial > img {
+  position: absolute;           /* Remove da flow normal e posiciona livremente */
+  top: 0;                       /* Ancora no topo da página */
+  width: 68%;                   /* Ocupa 68% da largura */
+  margin-left: 300px;           /* Afasta 300px da borda esquerda */
 }
