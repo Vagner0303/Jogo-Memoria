@@ -1,5 +1,4 @@
 body {
-  overflow-x: hidden;  /* Esconde a barra de rolagem horizontal */
   overflow: hidden;    /* Esconde qualquer conteúdo que ultrapasse a tela (horizontal e vertical) */
 }
 
